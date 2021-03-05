@@ -1,0 +1,13 @@
+#!/bin/sh
+
+set -e
+
+APK_PATH="$(mktemp)"
+curl -L -o "$APK_PATH" $1
+if [ `whoami` = "root" ] ; then
+    apk add --allow-untrusted "$APK_PATH"
+else
+    sudo apk add --allow-untrusted "$APK_PATH"
+fi
+
+rm -f "$APK_URL"

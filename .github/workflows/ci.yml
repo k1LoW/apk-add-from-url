@@ -1,0 +1,20 @@
+name: build
+
+on: push
+
+jobs:
+  job-test:
+    name: Test
+    runs-on: ubuntu-latest
+    container: alpine:latest
+    steps:
+      - name: Setup
+        run: apk add curl
+
+      - name: Check out source code
+        uses: actions/checkout@v2
+
+      - name: Test Local
+        run: |
+          cat ./apk-add-from-url | sh -s -- https://github.com/k1LoW/ghdag/releases/download/v0.3.0/ghdag_0.3.0-1_amd64.apk
+          ghdag -v
