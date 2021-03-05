@@ -3,6 +3,8 @@
 set -e
 
 APK_PATH="$(mktemp)"
+mv $APK_PATH "$APK_PATH.apk"
+APK_PATH="$APK_PATH.apk"
 curl -L -o "$APK_PATH" $1
 if [ `whoami` = "root" ] ; then
     apk add --allow-untrusted "$APK_PATH"
